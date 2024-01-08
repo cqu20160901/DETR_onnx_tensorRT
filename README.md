@@ -16,8 +16,11 @@ tensorrt 测试结果
 ![image](https://github.com/cqu20160901/DETR_onnx_tensorRT/blob/main/detr_tensorrt/test_result_tensorRT.jpg)
 
 转 tensorrt 可能会遇到的问题：
+
 （1）导出onnx后转tensorrt 加载不了，建议用onnxsim处理一下。
+
 （2）导出的tensorrt推理输出全为0，这个问题让我费解很久，在网上也很少有detr部署的资料，也有遇到这个问题的但是没有给出解决方案，几度想过放弃。
+
 
 tensorrt推理输出全为0，我的解决方法：
 
@@ -44,6 +47,7 @@ onnx.save(gs.export_onnx(graph), 'detr_r50_person_sim_change.onnx')
 按照上述修改输出结果还全是0，这下让人崩溃了。
 
 （2）转 tensorrt 不使用任何量化，使用 fp32_mode 模式
+
 代码里tensorrt 量化默认使用的是 fp16_mode，将量化方式注释掉输出结果正常。
 
 ```python
