@@ -41,6 +41,45 @@ for node in graph.nodes:
 onnx.save(gs.export_onnx(graph), 'detr_r50_person_sim_change.onnx')
 ```
 
-按照上述修改输出结果还全是0，这下让人崩溃了。我代码里tensorrt 量化默认使用的是 fp16_mode，考虑到是不是这个问题导致的，
+按照上述修改输出结果还全是0，这下让人崩溃了。
 
-（2）将tensorrt量化成 fp16_mode 
+（2）转 tensorrt 不使用任何量化，使用 fp32_mode 模式
+代码里tensorrt 量化默认使用的是 fp16_mode，将量化方式注释掉输出结果正常。
+
+```python
+def get_engine(onnx_model_name, trt_model_name):
+    explicit_batch = 1 << (int)(trt.NetworkDefinitionCreationFlag.EXPLICIT_BATCH)
+    with trt.Builder(G_LOGGER) as builder, builder.create_network(explicit_batch) as network, trt.OnnxParser(network,
+                                                                                                             G_LOGGER) as parser:
+        builder.max_batch_size = batch_size
+        builder.max_workspace_size = 2 << 30
+        print('Loading ONNX file from path {}...'.format(onnx_model_name))
+        with open(onnx_model_name, 'rb') as model:
+            print('Beginning ONNX file parsing')
+            if not parser.parse(model.read()):
+                for error in range(parser.num_errors):
+                    print(parser.get_error(error))
+
+        print('Completed parsing of ONNX file')
+        print('Building an engine from file {}; this may take a while...'.format(onnx_model_name))
+
+        ####
+        # builder.int8_mode = True
+        # builder.int8_calibrator = calib
+        # builder.fp16_mode = True
+        ####
+
+        print("num layers:", network.num_layers)
+        # last_layer = network.get_layer(network.num_layers - 1)
+        # if not last_layer.get_output(0):
+        # network.mark_output(network.get_layer(network.num_layers - 1).get_output(0))//有的模型需要，有的模型在转onnx的之后已经指定了，就不需要这行
+
+        network.get_input(0).shape = [batch_size, 3, imput_h, imput_w]
+        engine = builder.build_cuda_engine(network)
+        print("engine:", engine)
+        print("Completed creating Engine")
+        with open(trt_model_name, "wb") as f:
+            f.write(engine.serialize())
+        return engine
+```
+
