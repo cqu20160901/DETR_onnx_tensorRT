@@ -23,7 +23,7 @@ detr_tensorrt：测试图像、测试结果、测试tensorrt脚本、onnx2tensor
 
 ## tensorrt 推理输出全为 0
 
-（1）将修改onnx模型输出层Gather的参数（在网上看到的修改方法）：
+（1）修改onnx模型输出层Gather的参数（在网上看到的修改方法）：
 
 ```python
 graph = gs.import_onnx(onnx.load("./detr_r50_person_sim.onnx"))
@@ -45,7 +45,7 @@ onnx.save(gs.export_onnx(graph), 'detr_r50_person_sim_change.onnx')
 
 按照上述修改输出结果还全是0，这下让人崩溃了。
 
-（2）继续解决输出全为0的问题，转 tensorrt 不使用任何量化，使用 fp32_mode 模式
+（2）解决输出全为0的问题，转 tensorrt 不使用任何量化，使用 fp32_mode 模式
 
 代码里tensorrt 默认量化是 fp16_mode，将量化方式注释掉输出结果正常。
 
