@@ -1,5 +1,4 @@
-# DETR_onnx_tensorRT
-DETR tensorRT 部署
+# DETR tensorRT 部署
 
 detr_onnx：测试图像、测试结果、测试demo脚本
 
