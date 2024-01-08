@@ -5,7 +5,7 @@ detr_onnx：测试图像、测试结果、测试demo脚本
 
 detr_tensorrt：测试图像、测试结果、测试tensorrt脚本、onnx2tensorRT脚本(tensorRT-7.2.3.4)
 
-由于模型较大无法直接上传，onnx和tensorrt [模型文件](https://github.com/cqu20160901/DETR_onnx_tensorRT/releases)
+由于模型较大无法直接上传，onnx和tensorrt [模型文件](https://github.com/cqu20160901/DETR_onnx_tensorRT/releases)。
 
 说明：
 
