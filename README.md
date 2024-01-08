@@ -15,6 +15,7 @@ detr_tensorrt：测试图像、测试结果、测试tensorrt脚本、onnx2tensor
 
 （3）解决转tensorrt 输出全为 0 的问题。
 
+（4）detr C++ 部署[参考链接](https://github.com/cqu20160901/DETR_tensorRT_Cplusplus)。
 
 转 tensorrt 可能会遇到的问题：
 
