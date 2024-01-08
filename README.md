@@ -5,6 +5,8 @@ detr_onnx：测试图像、测试结果、测试demo脚本
 
 detr_tensorrt：测试图像、测试结果、测试tensorrt脚本、onnx2tensorRT脚本(tensorRT-7.2.3.4)
 
+由于模型较大无法直接上传，onnx和tensorrt [模型文件](https://github.com/cqu20160901/DETR_onnx_tensorRT/releases)
+
 说明：
 
 （1）本示例提供的模型只检测行人，由于训练的时类别写成了3，因此模型输出结果只有第二类说有效的。
