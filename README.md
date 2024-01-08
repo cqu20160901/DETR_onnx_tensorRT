@@ -28,7 +28,7 @@ tensorrt 测试结果
 
 
 
-## tensorrt推理输出全为0，我的解决方法：
+## tensorrt 推理输出全为 0
 
 （1）将修改onnx模型输出层Gather的参数（在网上看到的修改方法）：
 
