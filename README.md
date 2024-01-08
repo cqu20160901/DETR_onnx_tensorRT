@@ -13,19 +13,12 @@ detr_tensorrt：测试图像、测试结果、测试tensorrt脚本、onnx2tensor
 
 （3）解决转tensorrt 输出全为 0 的问题。
 
-onnx 测试结果
-![image](https://github.com/cqu20160901/DETR_onnx_tensorRT/blob/main/detr_onnx/test_onnx_result.jpg)
-
-tensorrt 测试结果
-![image](https://github.com/cqu20160901/DETR_onnx_tensorRT/blob/main/detr_tensorrt/test_result_tensorRT.jpg)
 
 转 tensorrt 可能会遇到的问题：
 
 （1）导出onnx后转tensorrt 加载不了，建议用onnxsim处理一下。
 
 （2）导出的tensorrt推理输出全为0，这个问题让我费解很久，网上查到也有遇到这个问题的但没有给出解决方案，几度想过放弃。
-
-
 
 
 ## tensorrt 推理输出全为 0
@@ -92,3 +85,9 @@ def get_engine(onnx_model_name, trt_model_name):
             f.write(engine.serialize())
         return engine
 ```
+
+onnx 测试结果
+![image](https://github.com/cqu20160901/DETR_onnx_tensorRT/blob/main/detr_onnx/test_onnx_result.jpg)
+
+tensorrt 测试结果
+![image](https://github.com/cqu20160901/DETR_onnx_tensorRT/blob/main/detr_tensorrt/test_result_tensorRT.jpg)
